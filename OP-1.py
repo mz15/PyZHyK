@@ -101,10 +101,10 @@ def Exit():      # А эта замячательная вещь закрыва�
 
 # Переделать функцию выхода: типа, а не хотите ли вы это сохранить?
 
-def Help():                                              # Это та функция, что вызывает хелер       !!! УДАЛИТЬ КОММЕНТ
-    vsok = Toplevel(ok)                                  # Создается зависимое окно                 !!! УДАЛИТЬ КОММЕНТ
-    vsok.title("Help")                                   # Называю его почеловечески...             !!! УДАЛИТЬ КОММЕНТ
-    lab = Label(vsok, text = shelp, font = "Courier 14") # Куда, что, каким шрифтом. Именно так.    !!! УДАЛИТЬ КОММЕНТ
+def Help():                                                 # Это та функция, что вызывает хелер           !!! УДАЛИТЬ КОММЕНТ
+    window = Toplevel(ok)                                  # Создается зависимое окно                 !!! УДАЛИТЬ КОММЕНТ
+    window.title("Help")                                   # Называю его почеловечески...             !!! УДАЛИТЬ КОММЕНТ
+    lab = Label(window, text = shelp, font = "Courier 14") # Куда, что, каким шрифтом. Именно так.    !!! УДАЛИТЬ КОММЕНТ
     lab.pack()                                           # Пакуем, а то не появится.                !!! УДАЛИТЬ КОММЕНТ
 
 def chet():
@@ -128,7 +128,7 @@ def poisk(event):
 def dob():
 
     def out(event):
-        vsok.destroy()
+        window.destroy()
     
     def proverka(event):
 
@@ -171,7 +171,7 @@ def dob():
 
         if z:
             database += [d]
-            vsok.destroy()
+            window.destroy()
                         
             p = []
             for i in range(0,len(database)):
@@ -180,16 +180,16 @@ def dob():
             vu(database,p)
 
    
-    vsok = Toplevel(ok)
-    vsok.title("Добавление записи")
-    vsok.minsize(width = 365,height = 150)
-    vsok.maxsize(width = 365,height = 150)
+    window = Toplevel(ok)
+    window.title("Добавление записи")
+    window.minsize(width = 365,height = 150)
+    window.maxsize(width = 365,height = 150)
 
-    fra1 = Frame(vsok, bg="lightblue")
-    fra2 = Frame(vsok, bg="lightblue")
-    fra3 = Frame(vsok, bg="lightblue")
-    fra4 = Frame(vsok, bg="lightblue")
-    fra5 = Frame(vsok, bg="lightblue")
+    fra1 = Frame(window, bg="lightblue")
+    fra2 = Frame(window, bg="lightblue")
+    fra3 = Frame(window, bg="lightblue")
+    fra4 = Frame(window, bg="lightblue")
+    fra5 = Frame(window, bg="lightblue")
 
     fra1.pack()
     fra2.pack()
