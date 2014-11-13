@@ -1,18 +1,17 @@
-#! Все для Линуксоидов)))
+info_help = '''
+здесь будет инструкции для пользователя
+'''     # Это будет храниться в файле!
+        # P.C. ДОБАВИТЬ СЛОВ!!!
+        # Это не работает, это ПыЖиК.
+        # Это хелпер проги... его еще пилить и пилить
+        #! ДОПИСАТЬ. И разобраться, как там изменять шрифты и все такое прочее.
 
-shelp='''
-HELP ME!!!
-
+info_about = '''
 В создании этой програмы принимали участие:
 Плешков Андрей
 Жукова Оксана
 Кравчук Павел
-
-Это не работает, это ПыЖиК.
-
-P.C. ДОБАВИТЬ СЛОВ!!!
-      ''' # Это хелпер проги... его еще пилить и пилить
-          #! ДОПИСАТЬ. И разобраться, как там изменять шрифты и все такое прочее.
+'''      # Это будет храниться в файле!
 
 database = [
     ['Борботько','Санкт-Петербург','89067778734','12.04.1996'],
@@ -98,23 +97,29 @@ def check_date(line):
 
     return(log)
 
-def exit():      # А эта замячательная вещь закрывает прогу                         !!! УДАЛИТЬ КОММЕНТ
-    ok.destroy() # Разрушаем главное окно, после него прога сама закроется          !!! УДАЛИТЬ КОММЕНТ
+def exit():
+    main_window.destroy()
 
 # Переделать функцию выхода: типа, а не хотите ли вы это сохранить?
 
-def Help():                                                 # Это та функция, что вызывает хелер           !!! УДАЛИТЬ КОММЕНТ
-    window = Toplevel(ok)                                  # Создается зависимое окно                 !!! УДАЛИТЬ КОММЕНТ
-    window.title("Help")                                   # Называю его почеловечески...             !!! УДАЛИТЬ КОММЕНТ
-    lab = Label(window, text = shelp, font = "Courier 14") # Куда, что, каким шрифтом. Именно так.    !!! УДАЛИТЬ КОММЕНТ
-    lab.pack()                                           # Пакуем, а то не появится.                !!! УДАЛИТЬ КОММЕНТ
+def help():
+    window = Toplevel(main_window)
+    window.title("Справка")
+    lab = Label(window, text = info_help, font = "Courier 14")
+    lab.pack()
 
-def chet():
+def about():
+    window = Toplevel(main_window)
+    window.title("О программе")
+    lab2 = Label(window, text = info_about, font = "Courier 14") #переименовать lab2
+    lab2.pack()    
+
+def chet(): #переименовать
     li=123
 
-def poisk(event):
-    p = ent.get()
-    ent.delete(0,END)
+def poisk(event): #переименовать
+    p = line_found.get()
+    line_found.delete(0,END)
     v = []
     i = 0
     for i in range(0,len(database)):
@@ -127,12 +132,12 @@ def poisk(event):
 
     vu(database,v)
     
-def dob():
+def DOB():
 
-    def out(event):
+    def out(event): #переименовать
         window.destroy()
     
-    def proverka(event):
+    def proverka(event): #переименовать
 
         pr1 = envs1.get()
         pr2 = envs2.get()
@@ -182,7 +187,7 @@ def dob():
             vu(database,p)
 
    
-    window = Toplevel(ok)
+    window = Toplevel(main_window)
     window.title("Добавление записи")
     window.minsize(width = 365,height = 150)
     window.maxsize(width = 365,height = 150)
@@ -227,15 +232,15 @@ def dob():
     bu1.bind("<Button-1>",proverka)
     bu2.bind("<Button-1>",out)
 
-def uzm():
+def uzm(): #переименовать
     c=123
 
-def cle():
+def cle(): #переименовать
     c=123
 
-def vu(database,p):
+def vu(database,p): #переименовать
 
-    lis.delete(0,END)
+    output.delete(0,END)
 
     k = len(str(len(database)))
     z = (k-1)*' '+'№'
@@ -243,43 +248,46 @@ def vu(database,p):
     z += 18*' '+'Город'
     z += 7*' '+'Номер телефона'
     z += 2*' '+'Дата рождения'
-    la2.configure(text=z)
-    ent.configure(width=k+70)
-    lis.configure(width=k+76)
+    line_columns.configure(text=z)
+    line_found.configure(width=k+70)
+    output.configure(width=k+76)
     for i in p:
         lk = (k-len(str(i+1)))*' '+str(i+1)
         lk += (17-len(database[i][0]))*' '+database[i][0]
         lk += (23-len(database[i][1]))*' '+database[i][1]
         lk += (21-len(database[i][2]))*' '+database[i][2]
         lk += 5*' '+database[i][3]
-        lis.insert(END,lk)
+        output.insert(END,lk)
 
     
     
-from tkinter import *       # Подключаем модуль GUI     !!! УДАЛИТЬ КОММЕНТ
+from tkinter import *
 
-ok = Tk()   # Задаем главное окно                       !!! УДАЛИТЬ КОММЕНТ
- 
-m = Menu(ok)        # Делаем в нем менюшку верхнюю      !!! УДАЛИТЬ КОММЕНТ
-ok.title("ПыЖиК")   # Наименование главного окна        !!! УДАЛИТЬ КОММЕНТ
-ok.config(menu=m)   # Связываем меню и окно             !!! УДАЛИТЬ КОММЕНТ
+main_window = Tk()
+main_window.title("ПыЖиК")
+main_menu = Menu(main_window)
+main_window.config(menu=main_menu)
 
-fm = Menu(m)        # Создается пункт меню с размещением на основном меню m
-m.add_cascade(label="File",menu=fm)             # Щелк и выпало менюшка...
-#!fm.add_command(label="Open...",command=Open)   Потом или никогда
-#!fm.add_command(label="New",command = New)      Потом или никогда
-#!fm.add_command(label="Save...",command = Save) Потом или никогда
-fm.add_command(label="exit",command=exit)       # Щелк, и все закрылось!
+first_menu = Menu(main_menu)
+main_menu.add_cascade(label="Файл",menu=first_menu)
+first_menu.add_command(label="Выход",command=exit)
+#!first_menu.add_command(label="Open...",command=Open)   Потом или никогда
+#!first_menu.add_command(label="New",command = New)      Потом или никогда
+#!first_menu.add_command(label="Save...",command = Save) Потом или никогда
 
-om = Menu(m) # Создается пункт меню с размещением на основном меню m
-m.add_cascade(label="Add enrry",command=dob) # Это добавление записи
-hm = Menu(m) # Создается пункт меню с размещением на основном меню m
-m.add_command(label="Help",command=Help) # Это хелпер
+second_menu = Menu(main_menu)
+main_menu.add_cascade(label="Добавить запись",command=DOB)
 
-la1 = Label(ok,text="Поиск:", font="Courier 14")                    # Выводит "Поиск: "
-ent = Entry(ok,width=71, font="Courier 14")                         # Сама строка поиска.
-la2 = Label(ok,text='',font="Courier 14")                           # Строка на наименований столбцов.
-lis = Listbox(ok,selectmode=SINGLE,font="Courier 14",width=77)      # Вывод самых записей
+third_menu = Menu(main_menu)
+main_menu.add_command(label="Справка",command=help)
+
+fourth_menu = Menu(main_menu)
+main_menu.add_command(label="О программе",command=about)
+
+poiskk = Label(main_window,text="Поиск:", font="Courier 14")
+line_found = Entry(main_window,width=71, font="Courier 14")
+line_columns = Label(main_window,text='',font="Courier 14")
+output = Listbox(main_window,selectmode=SINGLE,font="Courier 14",width=77)
 
 p = []
 for i in range(0,len(database)):
@@ -287,20 +295,20 @@ for i in range(0,len(database)):
 
 vu(database,p)
 
-scr = Scrollbar(ok,command=lis.yview)   # Создаем полоску прокрутки
-lis.configure(yscrollcommand=scr.set)   # Сустанавливаем связь между полоской прокрутки и списком
+scr = Scrollbar(main_window,command=output.yview)   # Создаем полоску прокрутки
+output.configure(yscrollcommand=scr.set)   # Сустанавливаем связь между полоской прокрутки и списком
 
-la1.grid(row=0,column=0)                            # В В Э Е
-ent.grid(row=0,column=1,columnspan=2)               # Ы С Т Р
-la2.grid(row=1,column=0,columnspan=2)               # В Е О Е
-lis.grid(row=2,column=0,rowspan=6,columnspan=3)     # О Й Й C
+poiskk.grid(row=0,column=0)                            # В В Э Е
+line_found.grid(row=0,column=1,columnspan=2)               # Ы С Т Р
+line_columns.grid(row=1,column=0,columnspan=2)               # В Е О Е
+output.grid(row=2,column=0,rowspan=6,columnspan=3)     # О Й Й C
 scr.grid(row=2,column=4,rowspan=6)                  # Д     И
 
-ent.bind("<Return>",poisk)
+line_found.bind("<Return>",poisk)
 
-#ok.maxsize(width = 880,height = 250)
-ok.minsize(width = 880,height = 250)
-ok.mainloop()   # Что-то, что все-таки создает наше окно
+#main_window.maxsize(width = 880,height = 250)
+main_window.minsize(width = 880,height = 250)
+main_window.mainloop()   # Что-то, что все-таки создает наше окно
 
 # Хотелось бы переписать все классами
 # Понять как менять шрифт
