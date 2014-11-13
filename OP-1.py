@@ -11,44 +11,41 @@ HELP ME!!!
 Это не работает, это ПыЖиК.
 
 P.C. ДОБАВИТЬ СЛОВ!!!
-      ''' # Это хелпер проги...
+      ''' # Это хелпер проги... его еще пилить и пилить
           #! ДОПИСАТЬ. И разобраться, как там изменять шрифты и все такое прочее.
 
-s = [['Борботько','Санкт-Петербург','89067778734','12.04.1996'],
-     ['Воробьева','Санкт-Петербург','84035793405','28.02.1996'],
-     ['Жукова','Таганрог','89819532406','25.11.1995'],
-     ['Зименко','Санкт-Петербург','89476389479','18.12.1995'],
-     ['Кравчук','Мурманск','89086068965','12.12.1995'],
-     ['Плешков','Пушкин','89078970896','09.05.1996'],
-     ['Бурков','Чебоксары','84123454051','01.02.1996'],
-     ['Гончар','Москва','89834565544','15.11.1995'],
-     ['Гашков','Пермь','89061111911','30.10.1996'],
-     ['Неменчинский','Красноярск','89086068965','12.12.1995'],
-     ['Фурсов','Санкт-Петербург','89052220917','12.03.1997']]
+database = [['Борботько','Санкт-Петербург','89067778734','12.04.1996'],
+            ['Воробьева','Санкт-Петербург','84035793405','28.02.1996'],
+            ['Жукова','Таганрог','89819532406','25.11.1995'],
+            ['Зименко','Санкт-Петербург','89476389479','18.12.1995'],
+            ['Кравчук','Мурманск','89086068965','12.12.1995'],
+            ['Плешков','Пушкин','89078970896','09.05.1996'],
+            ['Бурков','Чебоксары','84123454051','01.02.1996'],
+            ['Гончар','Москва','89834565544','15.11.1995'],
+            ['Гашков','Пермь','89061111911','30.10.1996'],
+            ['Неменчинский','Красноярск','89086068965','12.12.1995'],
+            ['Фурсов','Санкт-Петербург','89052220917','12.03.1997']]    #! Это должно храниться в файле!
 
-# Список...
-#! Это должно храниться в файле!
+lowercases = '''йцукенгшщзхъфывапролджэячсмитьбю'''
+uppercases = '''ЙЦУКЕНГШЩЗХФЫВАПРОЛДЖЭЯЧСМИТБЮ'''
+numerals = '''0123456789'''
+sign = '''- '''
 
-alfm = '''йцукенгшщзхъфывапролджэячсмитьбю'''   # Алфавит строчных символов
-alfb = '''ЙЦУКЕНГШЩЗХФЫВАПРОЛДЖЭЯЧСМИТБЮ'''     # Алфавит заглавных символов
-alfz = '''- '''                                 # Алфавит специальных знаков
 
-alf0 = '''0123456789''' # Алфавит цифр
-
-def prfg(line):     # Функция проверки фамилии и города
+def check_name_citi(line):
     log = False
     if len(line)>0:
-        if line[0] in alfb:
+        if line[0] in uppercases:
             log = True
             z = 0
             i = 1
             while i<(len(line)-1):
-                if ((line[i] in alfm) or (line[i] == "'")) and (z == 0):
+                if ((line[i] in lowercases) or (line[i] == "'")) and (z == 0):
                     i += +1
-                elif (line[i] in alfz) and (z == 0):
+                elif (line[i] in sign) and (z == 0):
                     i += +1
                     z = 1
-                elif (line[i] in alfb) and (z == 1):
+                elif (line[i] in uppercases) and (z == 1):
                     i += +1
                     z = 0
                 else:
@@ -57,26 +54,26 @@ def prfg(line):     # Функция проверки фамилии и горо
     
     return(log)
 
-def prte(line):     # Функция проверки номера телефона !ПЕРЕДЕЛАТЬ!
+def check_phone(line):     # !ПЕРЕДЕЛАТЬ!
     log = False
     if len(line) == 11:
         i = 0
-        while (i<len(line)) and (line[i] in alf0):
+        while (i<len(line)) and (line[i] in numerals):
             i += 1
         if i == len(line):
             log = True
             
     return(log)
 
-def prda(line):     # Функция проверки даты рождения
+def check_date(line):
     q1 = [1,3,5,7,8,10,12]
     q2 = [4,6,9,11]
     log = False
     if len(line) == 10:
         if (line[2] == '.') and (line[5] == '.'):
-            if (line[0] in alf0) and (line[1] in alf0):
-                if (line[3] in alf0) and (line[4] in alf0):
-                    if (line[6] in alf0) and (line[7] in alf0) and (line[8] in alf0) and (line[9] in alf0):
+            if (line[0] in numerals) and (line[1] in numerals):
+                if (line[3] in numerals) and (line[4] in numerals):
+                    if (line[6] in numerals) and (line[7] in numerals) and (line[8] in numerals) and (line[9] in numerals):
                         q = int(line[9])+10*(int(line[8])+10*(int(line[7])+10*(int(line[6]))))
                         if 1900<q<2014:
                             if (int(line[4])+10*(int(line[3]))) in q1:
@@ -99,16 +96,16 @@ def prda(line):     # Функция проверки даты рождения
 
     return(log)
 
-def Exit():      # А эта замячательная вещь закрывает прогу.
-    ok.destroy() # Разрушаем главное окно, после него прога сама закроется
+def Exit():      # А эта замячательная вещь закрывает прогу                         !!! УДАЛИТЬ КОММЕНТ
+    ok.destroy() # Разрушаем главное окно, после него прога сама закроется          !!! УДАЛИТЬ КОММЕНТ
 
 # Переделать функцию выхода: типа, а не хотите ли вы это сохранить?
 
-def Help():                                              # Это та функция, что вызывает хелер
-    vsok = Toplevel(ok)                                  # Создается зависимое окно
-    vsok.title("Help")                                   # Называю его почеловечески...
-    lab = Label(vsok, text = shelp, font = "Courier 14") # Куда, что, каким шрифтом. Именно так.
-    lab.pack()                                           # Пакуем, а то не появится.
+def Help():                                              # Это та функция, что вызывает хелер       !!! УДАЛИТЬ КОММЕНТ
+    vsok = Toplevel(ok)                                  # Создается зависимое окно                 !!! УДАЛИТЬ КОММЕНТ
+    vsok.title("Help")                                   # Называю его почеловечески...             !!! УДАЛИТЬ КОММЕНТ
+    lab = Label(vsok, text = shelp, font = "Courier 14") # Куда, что, каким шрифтом. Именно так.    !!! УДАЛИТЬ КОММЕНТ
+    lab.pack()                                           # Пакуем, а то не появится.                !!! УДАЛИТЬ КОММЕНТ
 
 def chet():
     li=123
@@ -118,17 +115,16 @@ def poisk(event):
     ent.delete(0,END)
     v = []
     i = 0
-    for i in range(0,len(s)):
+    for i in range(0,len(database)):
         k = 0
         while k<4:
-            if p in s[i][k]:
+            if p in database[i][k]:
                 v += [i]
                 k = 4
             k += 1
 
-    vu(s,v)
-
-
+    vu(database,v)
+    
 def dob():
 
     def out(event):
@@ -141,32 +137,32 @@ def dob():
         pr3 = envs3.get()
         pr4 = envs4.get()
         d = []
-        global s
+        global database
 
         z = True
         
-        if prfg(pr1) == True:
+        if check_name_citi(pr1) == True:
             d += [pr1]
         else:
             envs1.delete(0,END)
             envs1.insert(END,"Не верно")
             z = False
 
-        if (prfg(pr2) == True) and z:
+        if (check_name_citi(pr2) == True) and z:
             d += [pr2]
         else:
             envs2.delete(0,END)
             envs2.insert(END,"Не верно")
             z = False
             
-        if (prte(pr3) == True) and z:
+        if (check_phone(pr3) == True) and z:
             d += [pr3]
         else:
             envs3.delete(0,END)
             envs3.insert(END,"Не верно")
             z = False
                     
-        if (prda(pr4) == True) and z:
+        if (check_date(pr4) == True) and z:
             d += [pr4]
         else:
             envs4.delete(0,END)
@@ -174,14 +170,14 @@ def dob():
             z = False
 
         if z:
-            s += [d]
+            database += [d]
             vsok.destroy()
                         
             p = []
-            for i in range(0,len(s)):
+            for i in range(0,len(database)):
                 p += [i]
 
-            vu(s,p)
+            vu(database,p)
 
    
     vsok = Toplevel(ok)
@@ -235,11 +231,11 @@ def uzm():
 def cle():
     c=123
 
-def vu(s,p):
+def vu(database,p):
 
     lis.delete(0,END)
 
-    k = len(str(len(s)))
+    k = len(str(len(database)))
     z = (k-1)*' '+'№'
     z += 10*' '+'Фамилия'
     z += 18*' '+'Город'
@@ -250,21 +246,21 @@ def vu(s,p):
     lis.configure(width=k+76)
     for i in p:
         lk = (k-len(str(i+1)))*' '+str(i+1)
-        lk += (17-len(s[i][0]))*' '+s[i][0]
-        lk += (23-len(s[i][1]))*' '+s[i][1]
-        lk += (21-len(s[i][2]))*' '+s[i][2]
-        lk += 5*' '+s[i][3]
+        lk += (17-len(database[i][0]))*' '+database[i][0]
+        lk += (23-len(database[i][1]))*' '+database[i][1]
+        lk += (21-len(database[i][2]))*' '+database[i][2]
+        lk += 5*' '+database[i][3]
         lis.insert(END,lk)
 
     
     
-from tkinter import *   # Подключаем модуль GUI
+from tkinter import *       # Подключаем модуль GUI     !!! УДАЛИТЬ КОММЕНТ
 
-ok = Tk()   # Задаем главное окно
+ok = Tk()   # Задаем главное окно                       !!! УДАЛИТЬ КОММЕНТ
  
-m = Menu(ok)        # Делаем в нем менюшку верхнюю
-ok.title("ПыЖиК")   # Наименование главного окна
-ok.config(menu=m)   # Связываем меню и окно
+m = Menu(ok)        # Делаем в нем менюшку верхнюю      !!! УДАЛИТЬ КОММЕНТ
+ok.title("ПыЖиК")   # Наименование главного окна        !!! УДАЛИТЬ КОММЕНТ
+ok.config(menu=m)   # Связываем меню и окно             !!! УДАЛИТЬ КОММЕНТ
 
 fm = Menu(m)        # Создается пункт меню с размещением на основном меню m
 m.add_cascade(label="File",menu=fm)             # Щелк и выпало менюшка...
@@ -284,10 +280,10 @@ la2 = Label(ok,text='',font="Courier 14")                           # Строк
 lis = Listbox(ok,selectmode=SINGLE,font="Courier 14",width=77)      # Вывод самых записей
 
 p = []
-for i in range(0,len(s)):
+for i in range(0,len(database)):
     p +=[i]
 
-vu(s,p)
+vu(database,p)
 
 scr = Scrollbar(ok,command=lis.yview)   # Создаем полоску прокрутки
 lis.configure(yscrollcommand=scr.set)   # Сустанавливаем связь между полоской прокрутки и списком
