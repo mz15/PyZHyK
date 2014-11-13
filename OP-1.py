@@ -1,5 +1,5 @@
 info_help = '''
-здесь будет инструкции для пользователя
+здесь будут инструкции для пользователя
 '''     # Это будет храниться в файле!
         # P.C. ДОБАВИТЬ СЛОВ!!!
         # Это не работает, это ПыЖиК.
@@ -113,9 +113,6 @@ def about():
     window.title("О программе")
     lab2 = Label(window, text = info_about, font = "Courier 14") #переименовать lab2
     lab2.pack()    
-
-def chet(): #переименовать
-    li=123
 
 def poisk(event): #переименовать
     p = line_found.get()
@@ -232,12 +229,6 @@ def DOB():
     bu1.bind("<Button-1>",proverka)
     bu2.bind("<Button-1>",out)
 
-def uzm(): #переименовать
-    c=123
-
-def cle(): #переименовать
-    c=123
-
 def vu(database,p): #переименовать
 
     output.delete(0,END)
@@ -271,10 +262,6 @@ main_window.config(menu=main_menu)
 first_menu = Menu(main_menu)
 main_menu.add_cascade(label="Файл",menu=first_menu)
 first_menu.add_command(label="Выход",command=exit)
-#!first_menu.add_command(label="Open...",command=Open)   Потом или никогда
-#!first_menu.add_command(label="New",command = New)      Потом или никогда
-#!first_menu.add_command(label="Save...",command = Save) Потом или никогда
-
 second_menu = Menu(main_menu)
 main_menu.add_cascade(label="Добавить запись",command=DOB)
 
@@ -296,18 +283,18 @@ for i in range(0,len(database)):
 vu(database,p)
 
 scr = Scrollbar(main_window,command=output.yview)   # Создаем полоску прокрутки
-output.configure(yscrollcommand=scr.set)   # Сустанавливаем связь между полоской прокрутки и списком
+output.configure(yscrollcommand=scr.set)   # устанавливаем связь между полоской прокрутки и списком
 
-poiskk.grid(row=0,column=0)                            # В В Э Е
-line_found.grid(row=0,column=1,columnspan=2)               # Ы С Т Р
-line_columns.grid(row=1,column=0,columnspan=2)               # В Е О Е
-output.grid(row=2,column=0,rowspan=6,columnspan=3)     # О Й Й C
-scr.grid(row=2,column=4,rowspan=6)                  # Д     И
+poiskk.grid(row=0,column=0)                             # В В Э Е
+line_found.grid(row=0,column=1,columnspan=2)            # Ы С Т Р
+line_columns.grid(row=1,column=0,columnspan=2)          # В Е О Е
+output.grid(row=2,column=0,rowspan=6,columnspan=3)      # О Й Й C
+scr.grid(row=2,column=4,rowspan=6)                      # Д     И
 
 line_found.bind("<Return>",poisk)
 
-#main_window.maxsize(width = 880,height = 250)
-main_window.minsize(width = 880,height = 250)
+main_window.maxsize(width = 890,height = 275)
+main_window.minsize(width = 890,height = 275)
 main_window.mainloop()   # Что-то, что все-таки создает наше окно
 
 # Хотелось бы переписать все классами
