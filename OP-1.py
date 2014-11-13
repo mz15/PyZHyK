@@ -115,7 +115,19 @@ def chet():
 
 def poisk(event):
     p = ent.get()
-    
+    ent.delete(0,END)
+    v = []
+    i = 0
+    for i in range(0,len(s)):
+        k = 0
+        while k<4:
+            if p in s[i][k]:
+                v += [i]
+                k = 4
+            k += 1
+
+    vu(s,v)
+
 
 def dob():
 
