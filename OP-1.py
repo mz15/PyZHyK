@@ -57,13 +57,12 @@ def check_name_citi(line):
 
 def check_phone(line):
     log = False
-    if len(line) == 11:
-        if line[0] in '8':
-            i = 1
-            while (i<len(line)) and (line[i] in numerals):
-                i += 1
-            if i == len(line):
-                log = True
+    if (len(line) == 11) and (line[0] == '8'):
+        i = 1
+        while (i<len(line)) and (line[i] in numerals):
+            i += 1
+        if i == len(line):
+            log = True
             
     return(log)
 
