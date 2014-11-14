@@ -7,6 +7,8 @@ info_help = '''
         #! ДОПИСАТЬ. И разобраться, как там изменять шрифты и все такое прочее.
 
 info_about = '''
+Программа "ПыЖиК" является справочником, в котором можно найти человека, его дату рождения, номер телефона и город.
+
 В создании этой програмы принимали участие:
 Плешков Андрей
 Жукова Оксана
@@ -14,24 +16,24 @@ info_about = '''
 '''      # Это будет храниться в файле!
 
 database = [
-    ['Борботько','Санкт-Петербург','89067778734','12.04.1996'],
-    ['Воробьева','Санкт-Петербург','84035793405','28.02.1996'],
-    ['Жукова','Таганрог','89819532406','25.11.1995'],
-    ['Зименко','Санкт-Петербург','89476389479','18.12.1995'],
-    ['Кравчук','Мурманск','89086068965','12.12.1995'],
-    ['Плешков','Пушкин','89078970896','09.05.1996'],
-    ['Бурков','Чебоксары','84123454051','01.02.1996'],
-    ['Гончар','Москва','89834565544','15.11.1995'],
-    ['Гашков','Пермь','89061111911','30.10.1996'],
-    ['Неменчинский','Красноярск','89086068965','12.12.1995'],
-    ['Фурсов','Санкт-Петербург','89052220917','12.03.1997']
-]           #! Это должно храниться в файле!
+    ['Борботько', 'Санкт-Петербург', '89067778734', '12.04.1996'],
+    ['Воробьева', 'Санкт-Петербург', '84035793405', '28.02.1996'],
+    ['Жукова', 'Таганрог', '89819532406', '25.11.1995'],
+    ['Зименко', 'Санкт-Петербург', '89476389479', '18.12.1995'],
+    ['Кравчук', 'Мурманск', '89086068965', '12.12.1995'],
+    ['Плешков', 'Пушкин', '89078970896', '09.05.1996'],
+    ['Бурков', 'Чебоксары', '84123454051', '01.02.1996'],
+    ['Гончар', 'Москва', '89834565544', '15.11.1995'],
+    ['Гашков', 'Пермь', '89061111911', '30.10.1996'],
+    ['Неменчинский', 'Красноярск', '89086068965', '12.12.1995'],
+    ['Фурсов', 'Санкт-Петербург', '89052220917', '12.03.1997']
+]   #! Это должно храниться в файле!
 
+#Pre Next 4 lines contain all the characters used in the database
 lowercases = '''йцукенгшщзхъфывапролджэячсмитьбю'''
 uppercases = '''ЙЦУКЕНГШЩЗХФЫВАПРОЛДЖЭЯЧСМИТБЮ'''
 numerals = '''0123456789'''
 sign = '''- '''
-
 
 def check_name_citi(line):
     log = False
@@ -66,7 +68,7 @@ def check_phone(line):
             
     return(log)
 
-def check_date(line):
+def check_DOB(line):
     q1 = [1,3,5,7,8,10,12]
     q2 = [4,6,9,11]
     log = False
@@ -100,8 +102,6 @@ def check_date(line):
 def exit():
     main_window.destroy()
 
-# Переделать функцию выхода: типа, а не хотите ли вы это сохранить?
-
 def help():
     window = Toplevel(main_window)
     window.title("Справка")
@@ -111,10 +111,10 @@ def help():
 def about():
     window = Toplevel(main_window)
     window.title("О программе")
-    lab2 = Label(window, text = info_about, font = "Courier 14") #переименовать lab2
-    lab2.pack()    
+    lab = Label(window, text = info_about, font = "Courier 14")
+    lab.pack()    
 
-def poisk(event): #переименовать
+def found(event):
     p = line_found.get()
     line_found.delete(0,END)
     v = []
@@ -166,7 +166,7 @@ def DOB():
             envs3.insert(END,"Не верно")
             z = False
                     
-        if (check_date(pr4) == True) and z:
+        if (check_DOB(pr4) == True) and z:
             d += [pr4]
         else:
             envs4.delete(0,END)
@@ -282,20 +282,20 @@ for i in range(0,len(database)):
 
 vu(database,p)
 
-scr = Scrollbar(main_window,command=output.yview)   # Создаем полоску прокрутки
-output.configure(yscrollcommand=scr.set)   # устанавливаем связь между полоской прокрутки и списком
+scr = Scrollbar(main_window,command=output.yview)   # Создаем полоску прокрутки УДАЛИТЬ
+output.configure(yscrollcommand=scr.set)   # устанавливаем связь между полоской прокрутки и списком УДАЛИТЬ
 
-poiskk.grid(row=0,column=0)                             # В В Э Е
+poiskk.grid(row=0,column=0)                             # В В Э Е ВСЕ УДАЛИТЬ
 line_found.grid(row=0,column=1,columnspan=2)            # Ы С Т Р
 line_columns.grid(row=1,column=0,columnspan=2)          # В Е О Е
 output.grid(row=2,column=0,rowspan=6,columnspan=3)      # О Й Й C
 scr.grid(row=2,column=4,rowspan=6)                      # Д     И
 
-line_found.bind("<Return>",poisk)
+line_found.bind("<Return>",found)
 
 main_window.maxsize(width = 890,height = 275)
 main_window.minsize(width = 890,height = 275)
-main_window.mainloop()   # Что-то, что все-таки создает наше окно
+main_window.mainloop()
 
 # Хотелось бы переписать все классами
 # Понять как менять шрифт
