@@ -55,14 +55,15 @@ def check_name_citi(line):
     
     return(log)
 
-def check_phone(line):     # !ПЕРЕДЕЛАТЬ!
+def check_phone(line):
     log = False
     if len(line) == 11:
-        i = 0
-        while (i<len(line)) and (line[i] in numerals):
-            i += 1
-        if i == len(line):
-            log = True
+        if line[0] in '8':
+            i = 1
+            while (i<len(line)) and (line[i] in numerals):
+                i += 1
+            if i == len(line):
+                log = True
             
     return(log)
 
